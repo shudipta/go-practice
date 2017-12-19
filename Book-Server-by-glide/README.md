@@ -1,6 +1,12 @@
 # Book-Server by Glide
+
+## Commands to get the dependecies
+
+- `glide init`
+- `glide update`
+- `glide install`
   
-## Example command to run
+## Example commands to run
 
 - The following command will run the book server at port 10001 and it requires the authentication from user,
 
