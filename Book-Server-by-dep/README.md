@@ -1,6 +1,11 @@
 # Book-Server by Dep
+
+## Commands to get the dependecies
+
+- `dep init`
+- `dep ensure`
   
-## Example command to run
+## Example commands to run
 
 - The following command will run the book server at port 10001 and it requires the authentication from user,
 
