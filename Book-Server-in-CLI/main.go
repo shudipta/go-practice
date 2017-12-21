@@ -14,7 +14,7 @@
 
 package main
 
-import "Book-Server/cmd"
+import "Go-Practice/Book-Server-in-CLI/cmd"
 
 func main() {
 	cmd.Execute()

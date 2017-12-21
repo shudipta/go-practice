@@ -20,7 +20,7 @@ import (
 
 	//homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
-	"Book-Server/book_server"
+	"Go-Practice/Book-Server-in-CLI/book_server"
 	//"github.com/spf13/viper"
 )
 

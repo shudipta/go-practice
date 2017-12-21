@@ -1,0 +1,127 @@
+GET http://localhost:10001/showBookList?Title=aaa&Author=aa aa
+Accept:*/*
+Cache-Control:no-cache
+Authorization:Basic YWM6YWM=
+
+<> 2017-12-19T064830.200.txt
+
+###
+
+GET http://localhost:10001/addBook?Title=aaa&Author=aa aa
+Accept:*/*
+Cache-Control:no-cache
+Authorization:Basic YWM6YWM=
+
+<> 2017-12-19T064817.200.txt
+
+###
+
+GET http://localhost:10001/addBook
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+Authorization:Basic YWM6YWM=
+
+###
+
+GET http://localhost:10001/addBook
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+Authorization:Basic YWM6YWM=
+
+###
+
+GET http://localhost:10001/showBookList
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+Authorization:Basic YWM6YWM=
+
+<> 2017-12-19T064554.200.txt
+
+###
+
+GET http://localhost:10001/showBookList
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+
+<> 2017-12-19T064346.401.txt
+
+###
+
+GET http://localhost:10001
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+
+<> 2017-12-19T064343.200.txt
+
+###
+
+GET http://localhost:10001/showBookList
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+
+<> 2017-12-19T064336.401.txt
+
+###
+
+GET http://localhost:10001/addBook
+Accept:*/*
+Cache-Control:no-cache
+Title:aaa
+Author:aa aa
+
+<> 2017-12-19T064318.401.txt
+
+###
+
+GET http://localhost:10001/showBook
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-19T064130.200.txt
+
+###
+
+GET http://localhost:10001/showBook
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-19T064116.200.txt
+
+###
+
+GET http://localhost:10001/showBook
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-19T064108.200.txt
+
+###
+
+GET http://localhost:10001
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-19T064057.200.txt
+
+###
+
+GET http://localhost:10001
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2017-12-19T064022.200.txt
+
+###
+
