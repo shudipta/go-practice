@@ -8,11 +8,13 @@ import (
 	"strconv"
 	"strings"
 	"encoding/base64"
+	"context"
 )
 
+
 type Response struct {
-	statusCode int
-	msg string
+	StatusCode int
+	Msg string
 }
 
 type Book struct {
@@ -23,6 +25,7 @@ type Book struct {
 
 var Port = "10000"
 var LoggedIn bool
+var srv *http.Server = &http.Server{Addr: ":" + Port}
 
 var (
 	u = "http://localhost:" + Port
@@ -42,21 +45,21 @@ var (
 	deleted = "deleted successfully"
 )
 
-var books []Book
+var Books []Book
 
 func respond(w http.ResponseWriter, r Response) {
-	if r.statusCode == http.StatusUnauthorized {
+	if r.StatusCode == http.StatusUnauthorized {
 		w.Header().Add("WWW-Authenticate", `Basic realm="Authorization Required"`)
 	}
-	w.WriteHeader(r.statusCode)
-	fmt.Fprintf(w, r.msg)
+	w.WriteHeader(r.StatusCode)
+	fmt.Fprintf(w, r.Msg)
 }
 
 func checkAuth(r *http.Request) bool {
 	//return true
-	if !LoggedIn {
-		return true
-	}
+	//if !LoggedIn {
+	//	return true
+	//}
 
 	encodedInfo := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
 	if len(encodedInfo) != 2 {
@@ -93,11 +96,11 @@ func ShowBookList(r *http.Request) Response {
 		return Response{http.StatusUnauthorized, "unauthorized"}
 	}
 
-	if len(books) == 0 {
+	if len(Books) == 0 {
 		return  Response{http.StatusOK, empty}
 	}
 
-	list, convertErr := json.MarshalIndent(books, "", " ")
+	list, convertErr := json.MarshalIndent(Books, "", " ")
 	if convertErr != nil {
 		return Response{http.StatusInternalServerError, "Error occured in converting into json is " + convertErr.Error()}
 	}
@@ -132,8 +135,8 @@ func AddBook(r *http.Request) Response {
 		return Response{http.StatusBadRequest, emptyField}
 	}
 
-	book.Id = len(books) + 1
-	books = append(books, book)
+	book.Id = len(Books) + 1
+	Books = append(Books, book)
 
 	return Response{http.StatusOK, added}
 }
@@ -167,9 +170,9 @@ func EditBook(r *http.Request) Response {
 
 		book.Id = id
 
-		for i, _ := range books{
+		for i, _ := range Books{
 			if i + 1 == id {
-				books[i] = book
+				Books[i] = book
 
 				return Response{http.StatusOK, edited}
 			}
@@ -195,11 +198,11 @@ func DeleteBook(r *http.Request) Response {
 			return Response{http.StatusBadRequest, wrongId}
 		}
 
-		for i, _ := range books{
+		for i, _ := range Books{
 			if i + 1 == id {
-				books = append(books[:i], books[i+1:]...)
-				for j, _ := range books {
-					books[j].Id = j + 1
+				Books = append(Books[:i], Books[i+1:]...)
+				for j, _ := range Books {
+					Books[j].Id = j + 1
 				}
 
 				return Response{http.StatusOK, deleted}
@@ -212,13 +215,8 @@ func DeleteBook(r *http.Request) Response {
 	}
 }
 
-func HandleRequests(port string, loggedIn bool) {
-	Port = ":" + port
-	LoggedIn = loggedIn
+func HandleRequests() {
 
-	//if loggedIn {
-	//
-	//}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		respond(w, Hello(r))
@@ -236,14 +234,31 @@ func HandleRequests(port string, loggedIn bool) {
 		respond(w, DeleteBook(r))
 	})
 
-	serverErr :=http.ListenAndServe(Port, nil)
+
+}
+
+func StartServer(port string, loggedIn bool) {
+	Port = port
+	LoggedIn = loggedIn
+
+	srv.Addr = ":" + Port
+	serverErr := srv.ListenAndServe()
 
 	if serverErr != nil {
 		log.Fatal("Server Error:", serverErr)
 	}
 }
 
+func ShutdownServer() {
+	if err := srv.Shutdown(context.Background()); err != nil {
+		// Error from closing listeners, or context timeout:
+		log.Fatalf("HTTP server Shutdown: %v", err)
+	}
+}
+
 func main() {
-	HandleRequests("8080", true)
+	HandleRequests()
+	StartServer("8080", true)
+	ShutdownServer()
 }
 

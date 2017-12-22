@@ -35,14 +35,14 @@ func TestShowBookList(t *testing.T) {
 	r := httptest.NewRequest("GET", u + showBookList, nil)
 	r.Header.Set("Authorization", "Basic " + base64.StdEncoding.EncodeToString([]byte("ac:ac")))
 
-	books = []Book{}
+	Books = []Book{}
 	resp := ShowBookList(r)
 	if resp != res {
 		t.Error("1 -> Expected,", res, ",found", resp)
 	}
 
-	books = append(books, Book{1, "a", "a"})
-	books = append(books, Book{2, "b", "b"})
+	Books = append(Books, Book{1, "a", "a"})
+	Books = append(Books, Book{2, "b", "b"})
 	msg := `[
  {
   "Id": 1,
@@ -55,7 +55,7 @@ func TestShowBookList(t *testing.T) {
   "Author": "b"
  }
 ]`
-	res.msg = msg
+	res.Msg = msg
 	resp = ShowBookList(r)
 	if resp != res {
 		t.Error("2 -> Expected,", res, ",found", resp)

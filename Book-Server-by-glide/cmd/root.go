@@ -37,7 +37,9 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		book_server.HandleRequests(port, loggedIn)
+		book_server.HandleRequests()
+		//defer book_server.ShutdownServer()
+		book_server.StartServer(port, loggedIn)
 	},
 }
 
