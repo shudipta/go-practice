@@ -1,0 +1,5 @@
+package: github.com/shudipta/Go-Practice/practice
+import:
+- package: k8s.io/kubernetes
+  subpackages:
+  - pkg/util/parsers

@@ -1,0 +1,30 @@
+hash: 5a2a5e6b930aad4233da6a6521ee80475e1ab76e7567f23a3d88ed4f95267e54
+updated: 2018-04-11T15:27:32.908862696+06:00
+imports:
+- name: github.com/docker/distribution
+  version: 7484e51bf6af0d3b1a849644cdaced3cfcf13617
+  subpackages:
+  - digestset
+  - manifest
+  - manifest/schema1
+  - manifest/schema2
+  - reference
+- name: github.com/docker/libtrust
+  version: aabc10ec26b754e797f9028f4589c5b7bd90dc20
+- name: github.com/heroku/docker-registry-client
+  version: fd2fe803496897db70c236ee244f41487ea92ec2
+  subpackages:
+  - registry
+- name: github.com/opencontainers/go-digest
+  version: 279bed98673dd5bef374d3b6e4b09e2af76183bf
+- name: github.com/sirupsen/logrus
+  version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
+- name: golang.org/x/sys
+  version: 8dbc5d05d6edcc104950cc299a1ce6641235bc86
+  subpackages:
+  - unix
+- name: k8s.io/kubernetes
+  version: 925c127ec6b946659ad0fd596fa959be43f0cc05
+  subpackages:
+  - pkg/util/parsers
+testImports: []
