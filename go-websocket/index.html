@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Go WebSocket Tutorial</title>
+  </head>
+  <body>
+    <h2>Hello World</h2>
+
+    <script>
+        // let socket = new WebSocket("ws://104.199.136.167:9085");
+        // let socket = new WebSocket("ws://localhost:8080/ws");
+        let socket = new WebSocket("ws://wsock.p-stageenv.xyz:8081");
+        console.log("Attempting Connection...");
+        socket.onopen = () => {
+            console.log("Successfully Connected");
+            var data = JSON.stringify({
+               type:"register", 
+               token: "4LHL0Ugfhv8HdTg7jtCPGfQio738yZgPXfBcXg9J",
+               uuid:"e0fc04c4a0fe11e78c7c0401f1128301",
+              //  token: "f0Z3t-fE814:APA91bHuiNum24OptySDtbwdCDoYRwCNpi-Y4CJUFwtUd5_B6kzPD4SaOVaknUclOxcjRPIFln8y_9OwyGwG4KqmMwYosEyaNcpPIbQnx19w7bKzw6Y3HHdmD6Yk9ymUIbUpdwJSaw80",
+              //  uuid:"9c25ab0cd5f6e752",
+              //  user_id :34534,
+             })
+            // socket.emit(data);
+            socket.send(data);
+            console.log("data sent", data);
+            // socket.send("Hi From the Client!")
+        };
+        
+        socket.onclose = event => {
+            console.log("Socket Closed Connection: ", event);
+            socket.send("Client Closed!")
+        };
+
+        socket.onerror = error => {
+            console.log("Socket Error: ", error);
+        };
+
+        socket.onmessage = (event) => {
+  
+            console.log(">>>>>>>>>>>", event.data);
+            // socket.close();
+        };
+
+
+
+//         const WebSocket = require('ws');
+// const wss = new WebSocket.Server({ host: "wsock.p-stageenv.xyz", port:8081 });
+// // let wss = new WebSocket("ws://wsock.p-stageenv.xyz:8081");
+
+// wss.on('connection', function (ws, req) {
+//     const remoteAddress = req.connection.remoteAddress
+//     ws.send(
+//       JSON.stringify({
+//          "type":"register",
+//          "token": "4LHL0Ugfhv8HdTg7jtCPGfQio738yZgPXfBcXg9J",
+//           "uuid":"e0fc04c4a0fe11e78c7c0401f1128301",
+//         })
+//     );
+
+//     ws.on('message', function (d) {
+//         const data = JSON.parse(d);
+//         console.log("Data from  %s : %j", remoteAddress, data);
+
+//         if (data.success && data.success.count == 40) {
+//             // TODO: Call an url ...
+//         }
+//     });
+// });
+
+    </script>
+  </body>
+</html>
+
